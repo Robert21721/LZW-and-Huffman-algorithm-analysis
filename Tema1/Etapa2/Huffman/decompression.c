@@ -1,8 +1,8 @@
 #include "header.h"
 
-void decompression() {
-    FILE *fin = fopen("file.out", "rb");
-    FILE *fout = fopen("rez.out", "wb");
+void decompression(char *file_name_in, char *file_name_out) {
+    FILE *fin = fopen(file_name_in, "rb");
+    FILE *fout = fopen(file_name_out, "wb");
     MinHeap *heap = initMinheap(1000);
 
     int nr_caracter_dif;

@@ -1,9 +1,9 @@
 #include "header.h"
 
-void compression() {
+void compression(char *file_name_in, char *file_name_out) {
 
-    FILE *fin1 = fopen("Zeus_and_Hera_2.0.png", "rb");
-    FILE *fout = fopen("file.out", "wb");
+    FILE *fin1 = fopen(file_name_in, "rb");
+    FILE *fout = fopen(file_name_out, "wb");
     TNode *r = createTree(fin1, fout);
     fclose(fin1);
     restore_parent_link(r);
@@ -11,7 +11,7 @@ void compression() {
     TNode **hTable = init_hashT();
     create_hashTable(hTable, r);
 
-    FILE *fin2 = fopen("Zeus_and_Hera_2.0.png", "rb");
+    FILE *fin2 = fopen(file_name_in, "rb");
 
     char ch;
     unsigned int a = 0;

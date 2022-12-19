@@ -179,23 +179,16 @@ int main(int argc, char *argv[])
 		return -1;
 	} 
 	// string s = "WYS*WYGWYS*WYSWYSG";
-	vector<int> output_code = encoding(argv[1]);
+	if (strcmp(argv[1], "-c") == 0) {
+        vector<int> output_code = encoding(argv[2]);
+		write_to_compressed_file(output_code, argv[3]);
+    }
 
 
-	// cout << "Output Codes are: ";
-	// for (int i = 0; i < output_code.size(); i++) {
-	// 	cout << output_code[i] << " ";
-	// }
-	// cout << endl;
+    if (strcmp(argv[1], "-d") == 0) {
+        vector<int> output_code_decod = read_from_compress_file(argv[2]);
+		decoding(output_code_decod, argv[3]);
 
-	write_to_compressed_file(output_code, argv[2]);
 
-	vector<int> output_code_decod = read_from_compress_file(argv[2]);
-
-	// for (int i = 0; i < output_code_decod.size(); i++) {
-	// 	cout << output_code_decod[i] << " ";
-	// }
-	// cout << endl;
-
-	decoding(output_code_decod, argv[3]);
+    }
 }
