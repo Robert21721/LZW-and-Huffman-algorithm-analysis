@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-# define SIZE 17
+# define SIZE 20
 
 vector<int> encoding(char *file_in) {
 	FILE *fin = fopen(file_in, "rb");
