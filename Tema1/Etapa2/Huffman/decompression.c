@@ -43,6 +43,15 @@ void decompression(char *file_name_in, char *file_name_out) {
 
     TNode *node = heap->arr[0];
     int pos = 8 * sizeof(int) - 1;
+
+    if (is_leaf(node)) {
+        while (node->freq > 0) {
+            fwrite(&node->ch, sizeof(char), 1, fout);
+            node->freq--;
+        }
+        return;
+    }
+
     while (fread(&buff, sizeof(unsigned int), 1, fin)) {
         for (int pos = 8 * sizeof(int) - 1; pos >= 0; pos--) {
             int dir = ((1 << pos) & buff) >> pos;
