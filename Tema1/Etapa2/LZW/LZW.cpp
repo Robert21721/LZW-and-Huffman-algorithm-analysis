@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-# define SIZE 20
+#define SIZE 20
 
 vector<int> encoding(char *file_in) {
 	FILE *fin = fopen(file_in, "rb");
@@ -36,8 +36,6 @@ vector<int> encoding(char *file_in) {
 			p = p + c;
 
 		} else {
-			//cout << p << "\t" << table[p] << "\t\t" << p + c << "\t" << code << endl;
-
 
 			output_code.push_back(table[p]);
 			table[p + c] = code;
@@ -46,7 +44,9 @@ vector<int> encoding(char *file_in) {
 		}
 		c = "";
 	}
-	// cout << p << "\t" << table[p] << endl;
+
+	
+
 	output_code.push_back(table[p]);
 	output_code.push_back((1 << (SIZE)) - 1);
 	return output_code;
@@ -61,17 +61,14 @@ void write_to_compressed_file(vector<int> output_code, char* file_out) {
 	for (int i = 0; i < output_code.size(); i++) {
 		if (pos < SIZE) {
 			buff = buff + (output_code[i] >> (SIZE - pos));
-			// printf("buff1 dupa update %d\n", buff);
 
 			fwrite(&buff, sizeof(int), 1, fout);
 
 			buff = output_code[i] << (8 * sizeof(unsigned int) - SIZE + pos);
 			pos = 8 * sizeof(unsigned int) - SIZE + pos;
-			// printf("buff2 dupa update %d\n", buff);
 		} else {
 			buff = buff + (output_code[i] << (pos - SIZE));
 			pos = pos - SIZE;
-			// printf("buff normal %d\n", buff);
 		}
 	}
 
@@ -103,7 +100,6 @@ vector<int> read_from_compress_file(char *file_in) {
 
 			fread(&buff, sizeof(unsigned int), 1, fin);
 
-			// aux = aux + (buff & (mask << (pos + SIZE - 8 * sizeof(unsigned int))) >> (pos + SIZE - 8 * sizeof(unsigned int)));
 			int shift_val = 8 * sizeof(unsigned int) - SIZE + pos;
 			aux = aux + ((buff & (mask << shift_val)) >> shift_val);
 			pos = 8 * sizeof(unsigned int) - SIZE + pos;
@@ -112,8 +108,6 @@ vector<int> read_from_compress_file(char *file_in) {
 			aux = (buff & (mask << (pos - SIZE))) >> (pos - SIZE);
 			pos = pos - SIZE;
 		}
-
-		// printf("%d\n", aux);
 
 		if (aux != (1 << (SIZE)) - 1) {
 			output_code.push_back(aux);
@@ -126,9 +120,7 @@ vector<int> read_from_compress_file(char *file_in) {
 }
 
 void decoding(vector<int> op, char *file_name) {
-	// cout << "\nDecoding\n";
 	unordered_map<int, string> table;
-
 
 	for (int i = 0; i <= 255; i++) {
 		string ch = "";
@@ -143,7 +135,6 @@ void decoding(vector<int> op, char *file_name) {
 	string c = "";
 	c += s[0];
 
-	// cout << s;
 	for (int i = 0; i < s.size(); i++) {
 		fwrite(&s[i], sizeof(char), 1, fout);
 	}
@@ -159,7 +150,6 @@ void decoding(vector<int> op, char *file_name) {
 			s = table[n];
 		}
 
-		// cout << s;
 		for (int i = 0; i < s.size(); i++) {
 			fwrite(&s[i], sizeof(char), 1, fout);
 		}
@@ -170,25 +160,25 @@ void decoding(vector<int> op, char *file_name) {
 		count++;
 		old = n;
 	}
-    // cout<<endl;
 }
+
+
 int main(int argc, char *argv[])
 {
 	if (argc < 4 || argc > 5) {
 		printf("nr invalid de argumente\n");
 		return -1;
 	} 
-	// string s = "WYS*WYGWYS*WYSWYSG";
+
 	if (strcmp(argv[1], "-c") == 0) {
         vector<int> output_code = encoding(argv[2]);
 		write_to_compressed_file(output_code, argv[3]);
     }
 
-
     if (strcmp(argv[1], "-d") == 0) {
         vector<int> output_code_decod = read_from_compress_file(argv[2]);
 		decoding(output_code_decod, argv[3]);
-
-
     }
+
+	return 0;
 }

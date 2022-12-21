@@ -14,7 +14,7 @@
 
 \begin{abstract}
 Scopul acestei lucrari este acela de a aduce in atentie si a analiza
-eficienta algoritmilor de compresie Huffman si Lempel-Ziv-Welch (LSW)
+eficienta algoritmilor de compresie Huffman si Lempel-Ziv-Welch (LZW)
 pe un set cat mai amplu de date.
 
 \keywords{Compresie  \and Huffman Coding \and Lempel-Ziv-Welch}
@@ -56,7 +56,7 @@ In schimb, metoda de compresie Lempel-Ziv-Welch aduce in plus posibilitatea de
 a codifica \textbf{secvente de mai multe caractere ce se repeta}. Algoritmul aduce cu sine
 un dictionar ce isi mareste capacitatea cu fiecare secventa noua gasita.
 Desi codificarile vor fi facute pe un numar fix de biti (in general mai mare decat
-dimensiunea unui octet, ajungand pana la 12 sau 13 biti), daca fisierul are cuvinte
+dimensiunea unui octet, ajungand pana la 20 de biti), daca fisierul are cuvinte
 sau secvente de litere ce se repeta, acestea vor aparea in fisierul comprimat sub forma
 unui singur cod.
 
@@ -102,12 +102,115 @@ in ce caz este mai bun un algoritm decat celalalt.
 
 
 
+\section{Prezentarea solutiilor}
+\subsubsection{Algoritmul Huffman} are la baza o structura de date arborescenta ce poarta acelasi
+nume (arborele Huffman). Acest arbore este special construit astfel incat, parcurgand nodurile sale
+de la radacina spre oricare dintre frunze, drumul parcurs va fi mai scurt cu cat caracterul atribuit
+frunzei are o frecventa mai mare in fisierul de intrare. Pentru a realiza aceasta proprietate, constructia
+arborelui incepe cu frunzele acestuia si inainteaza spre radacina, nodurile fiind adaugate crescator in functie
+de frecventa. Pentru a face asta, am folosit un minheap care imi va extrage mereu litera cu frecventa minima
+ce nu a fost inca adaugata si ii va creea un nod in arborele Huffman. Fiecare doua noduri vor fi unite printr-un
+nod aditional ce nu contine niciun caracter si are frecventa egala cu suma frecentelor celor doua noduri copil.
+Deoarece dorim coduri cat mai scurte, in momentul in care frecventa nodului parinte devine mai mare decat frecventa
+oricarei alte litere, va fi creeat un subarbore ce respecta aceleasi proprietati si care va fi ulterior atasat de
+arborele principal.
+Acest proces este realizat prin adaugarea in minheap a noului nod.
+
+Odata obtinut arborele, \textbf{comprimarea} se realizeaza prin retinerea intr-un fisier binar a fiecarui caracter intalnit alaturi de frecventa sa (date necesare decomprimarii),
+dupa care fisierul de input este parcurs si fiecare litera din acesta este inlocuita in fisierul binar cu codul corespunzator.
+Pentru un acces mai rapid, am folosit un hashtable ce are chiea egala cu valoarea numerica a caracterului (byte-ului),
+valoarea fiind reprezentata de codificarea sa binara.
+
+Pentru procesul de \textbf{decomprimare} sunt citite din fisierul binar caracterele impreuna cu frecventa lor dupa care este refacut arborele
+Huffman. Odata creeat, se citeste fisierul bit cu bit si se parcurge arborele in functie de acesta (0 - stanga, 1 - dreapta).
+Cand se ajunge la o frunza putem fi siguri ca aceasta contine un caracter valid, caracterul fiind scris apoi in noul fisier.
+
+\textbf{Complexitatea temporala} a acestui algoritm este O(NlogN) deoarece fiecare iteratie prin minheap pentru a pastra proprietatea
+acestuia ne va costa logN pasi, aceasta fiind refacuta de N ori (o data pentru fiecare element)
+In plus, pentru a construi arborele, la fiecare pas sunt extrase 2 noduri din minheap, ceea ce ar insemna 2logN operatii pentru a reface heapul
+si apoi este adaugat in minheap nodul parinte obtinut (inca logN operatii pentru a reface heapul). Aceste operatii sunt executate de N ori (pentru
+ca la fiecare pas sunt scoase 2 noduri si adaugat unul nou) ceea ce in final ne va duce la o complexitate de O(3NlogN) adica tot O(NlogN), unde
+N este numarul de caractere diferite intalnite in fisier.
+
+Cum N-ul nostru nu poate fi mai mare de 256, putem considera aceste operatii ca fiind chiar constante, adevarata "greutate" a algoritmului fiind de fapt
+data de parcurgerea datelor de intrare, complexitatea fiind in acest caz O(M), unde M este numarul de caractere (bytes) din fisier.
+
+\subsubsection{Algoritmul Lempel-Ziv-Welch (LZW)} are la baza o structura de tip dictionar ce adauga secvente noi de litere folosindu-se de cele
+anterioare. Acest dictonar porneste cunoscand initial doar caracterele ASCII si se extinde continuu pana la finalul algoritmului.
+Codul secventei nou aparute va primi urmatorul index disponibil in dictionar. Fata de Huffman care putea
+genera un cod cu numar diferit de biti, algoritmul LZW are de la inceput stabilit pe cati biti vor fi facute codificarile. Deoarece testele alese de mine contin
+si fisiere mai mari de 1MB, codificarea a fost facuta pe un numar de 20 de biti.
+
+Pentru a fluidiza putin codul am separat functiile care comprima si decomprima fisierul de cele care fac citirea si scrierea in si din
+fisiere binare, acestea comunicand intre ele prin intermediul unui vector de inturi.
+
+Am ales sa scriu acest algoritm in C++ deoarece aveam nevoie de implementarea unor structuri de date cu o capacitate
+mare de stocare ce isi puteau extinde usor dimensiunea (atat pentru dictionar cat si pentru vectorul auxiliar).
+
+In vederea \textbf{comprimarii} fisierului de input, acesta este parcurs litera cu litera. Odata primita o litera, acesta o adauga la secventa pe care o detinea anterior.
+In momentul in care secventa curenta nu mai este gasita in dictionar, se scrie codul ultimei secventa cunoscute in vectorul de inturi,
+noua secventa este adaugata in dictionar iar algoritmul isi reincepe cautarea.
+
+In cazul \textbf{decompresiei}, codurile consecutive duc la adaugarea in dictionar a celor doua stringuri concatenate, algoritmul urmarind procesul invers celui de comprimare.
+
+\textbf{Complexitatea temporala} este, la fel ca si la Huffman, data de dimensiunea datelor de intrare, atat indexarea prin tabela de dispersie cat si adaugarea in ea (si in vector)
+fiind efectuate in timp constant. Singurul factor ce induce o complexitate diferita de una constanta se datoreaza fisierului
+ce trebuie parcurs pentru citirea datelor de intrare. De asemenea, pentru parcurgerea vectorului auxiliar se ajunge la aceeasi complexitate ca si la citire, aceasta fiind tot
+O(M), unde M reprezinta dimensiunea fisierului de intrare.
+
+
+\subsection*{Avantaje si dezavantaje}
+Algoritmul Huffman are avantajul ca poate rula pe fisiere de orice dimensiune fara a fi limitat la un anumit numar de biti pe codificare, in timp ce
+algoritmul LZW are nevoie de la inceput de un numar fix de biti pe care sa fie reprezentate codurile.
+Aceasta constrangere influenteaza in mod negativ performanta  algoritmului deoarece, daca am alege un numar mare de biti pentru fiecare codificare, chiar daca algoritmul ar putea acum
+sa comprime fisiere mari fara probleme, acesta ar avea un randament foarte prost pe fisiere mici. Acest lucru se datoreaza faptului ca nu vor fi folositi toti bitii pe care noi ii oferim
+pentru codificare, caz in care vom avea o buna parte din memorie irosita.
+
+In schimb, algoritmul LZW castiga eficienta in cazul in care, caractere cu aceeasi frecventa apar dupa un tipar stabilit. In acest caz, el isi poate folosi dictionarul intr-un mod foarte eficient,
+compresia rezultata fiind si ea una foarte buna. Pe aceeasi intrare, algoritmul Huffman s-ar descurca foarte prost tocmai pentru ca nu exista o diferenta intre numarul de aparitii al anumitor
+caractere, arborele fiind construit in mod aleator, fara a avea un randament bun cand atribuie codurile caracterelor.
+
+Pe un text normal ce contine doar caractele alfa-numerice, ambii algoritmi s-ar descurca bine, micile diferente fiind date de numarul de repetitii al caracterelor/ cuvintelor (daca se repeta
+multe cuvinte, balanta se va inclina in favoarea LZW, daca se repeta multe litere, Huffman va fi mai eficient). Diferenta poate fi facuta si de numarul fix de biti ai
+codificarii LZW, caz in care multi biti ar putea fi irositi.
+
+Din punct de vedere al memoriei folosite, Algoritmul Huffman are o eficienta mult mai buna decat LZW, acesta ajungand sa aiba alocat maxim 256 de noduri+ nodurile aditionale pentru parinti.
+In schimb, LZW isi va mari constant dictionarul chiar daca informatia ar putea fi inutila, acesta continuand sa creasca pana la terminarea programului, atingand un numar foarte mare de codificari.
+
+
+\section{Evaluare}
+
+In testele generate am incercat sa ating atat cazuri limita cat cazuri medii si bune pentru ambii algoritmi.
+O parte din testele folosite au fost generate de mine folosind un program simplu in C, celelalte fiind descarcate de pe internet (pozele si fisierele audio).
+
+In cazul fisierelor .txt am incercat sa acopar cazuri de genul:
+\begin{itemize}
+    \item acelasi caracter de un numar mare de ori
+    \item 3 caractere de un numar mare de ori (aceeasi frecventa toate 3)
+    \item intregul alfabet de un numar mare de ori (aceeasi frecventa toate 3)
+    \item toate caracterele ascii de un numar mare de ori (aceeasi frecventa toate 3)
+    \item toate caracterele ascii de un numar mare de ori (frecvente crescatoare)
+    \item caractere cu diferenta mare intre numarul de aparitii
+    \item text lung care nu se repeta 
+    \item text scurt care se repeta de un numar mare de ori
+\end{itemize}
+
+In cazul imaginilor, am ales formatul .bmp deoarece bitii imaginii sunt stocati in mod "direct", imaginea nefiind deja comprimata (asa cum sunt fisierele .jpg sau .png).
+Cu aceste teste am incercat sa ating urmatoarele posibilitati:
+\begin{itemize}
+    \item imagini cu numar redus de culori (doua sau trei)
+    \item imagini colorate cu dimensiune mica
+    \item imagini colorate cu dimensiune mare
+\end{itemize}
+
+
+
 
 
 %%% TODO
 \begin{thebibliography}{8}
 \bibitem{ref_article1}
-Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel–Ziv–Welch (LZW) Coding as
+Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel-Ziv-Welch (LZW) Coding as
 Data Compression Techniques\textbf{}
 
 \bibitem{ref_url1}
