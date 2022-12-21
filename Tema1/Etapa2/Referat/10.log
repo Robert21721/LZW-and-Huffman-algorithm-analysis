@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.7)  21 DEC 2022 23:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.7)  22 DEC 2022 00:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -217,20 +217,49 @@ Overfull \hbox (6.81343pt too wide) in paragraph at lines 128--134
 []\T1/cmr/bx/n/10 Complexitatea tem-po-rala \T1/cmr/m/n/10 a aces-tui al-go-ritm este O(NlogN) deoarece fiecare
  []
 
-[3] [4] [5] (./10.aux) ) 
+[3] [4]
+Package epstopdf Info: Source file: <tabel1.eps>
+(epstopdf)                    date: 2022-12-22 00:36:09
+(epstopdf)                    size: 2668034 bytes
+(epstopdf)             Output file: <tabel1-eps-converted-to.pdf>
+(epstopdf)                    date: 2022-12-22 00:39:07
+(epstopdf)                    size: 64873 bytes
+(epstopdf)             Command: <repstopdf --outfile=tabel1-eps-converted-to.pdf tabel1.eps>
+(epstopdf)             \includegraphics on input line 214.
+Package epstopdf Info: Output file is already uptodate.
+<tabel1-eps-converted-to.pdf, id=23, 391.4625pt x 405.515pt>
+File: tabel1-eps-converted-to.pdf Graphic file (type pdf)
+<use tabel1-eps-converted-to.pdf>
+Package pdftex.def Info: tabel1-eps-converted-to.pdf  used on input line 214.
+(pdftex.def)             Requested size: 347.12354pt x 359.60161pt.
+Package epstopdf Info: Source file: <tabel2.eps>
+(epstopdf)                    date: 2022-12-22 00:34:10
+(epstopdf)                    size: 7646248 bytes
+(epstopdf)             Output file: <tabel2-eps-converted-to.pdf>
+(epstopdf)                    date: 2022-12-22 00:39:55
+(epstopdf)                    size: 155869 bytes
+(epstopdf)             Command: <repstopdf --outfile=tabel2-eps-converted-to.pdf tabel2.eps>
+(epstopdf)             \includegraphics on input line 221.
+Package epstopdf Info: Output file is already uptodate.
+<tabel2-eps-converted-to.pdf, id=24, 1529.715pt x 828.09375pt>
+File: tabel2-eps-converted-to.pdf Graphic file (type pdf)
+<use tabel2-eps-converted-to.pdf>
+Package pdftex.def Info: tabel2-eps-converted-to.pdf  used on input line 221.
+(pdftex.def)             Requested size: 347.12354pt x 187.90515pt.
+ [5] [6 <./tabel1-eps-converted-to.pdf>] [7 <./tabel2-eps-converted-to.pdf>] (./10.aux) ) 
 Here is how much of TeX's memory you used:
- 1984 strings out of 479574
- 29426 string characters out of 5877220
- 328307 words of memory out of 5000000
- 19987 multiletter control sequences out of 15000+600000
+ 2001 strings out of 479574
+ 29828 string characters out of 5877220
+ 328323 words of memory out of 5000000
+ 20001 multiletter control sequences out of 15000+600000
  479295 words of font info for 47 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 55i,7n,62p,329b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,7n,62p,407b,224s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0500.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk>
-Output written on 10.pdf (5 pages, 68460 bytes).
+Output written on 10.pdf (7 pages, 289508 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 274 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
