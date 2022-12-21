@@ -189,7 +189,7 @@ In cazul fisierelor .txt am incercat sa acopar cazuri de genul:
     \item 3 caractere de un numar mare de ori (aceeasi frecventa toate 3)
     \item intregul alfabet de un numar mare de ori (aceeasi frecventa toate 3)
     \item toate caracterele ascii de un numar mare de ori (aceeasi frecventa toate 3)
-    \item toate caracterele ascii de un numar mare de ori (frecvente crescatoare)
+    \item toate caracterele ascii de un numar mare de ori (frecvente diferite)
     \item caractere cu diferenta mare intre numarul de aparitii
     \item text lung care nu se repeta 
     \item text scurt care se repeta de un numar mare de ori
@@ -203,33 +203,75 @@ Cu aceste teste am incercat sa ating urmatoarele posibilitati:
     \item imagini colorate cu dimensiune mare
 \end{itemize}
 
+Am folosit in continuare 3 teste cu fisiere care sunt deja intr-o forma comprimata (fisiere .webp si .mp3) si un fisier binar generat random folosind comanda cat /dev/urandom.
+
+Ultimele teste contin fisiere sursa din diverse limbaje de programare. Acestea sunt niste exemple bune de fisiere text deoarece atat elementele de sintaxa cat si
+numele variabilelor se repeta, caz in care algoritmii ar fi destul de eficienti.
+
+Ruland cei doi algoritmi pe datele de intrare mentionate mai sus, avand la dispozitie in procesor I7 genetaria 11, 16 GB de ram si o placa grafica de 4GB, rezultatele au fost urmatoarele:
+
+% \begin{table}[ht]
+% \caption{Tabel ce contine dimensiunile fisierelorerelor
+% de intrare si a celor rezultate}\label{tab1}
+% \centering
+% \begin{tabular}{|l|l|l|l|}
+% \hline
+% tests & fisiere de input & Huffman  & LZW\\
+% % \hline
+% test1 & 1000  & 13 & \\
+% test2 & 293K & 62K & \\
+% test3 & 254K & 152K & \\
+% test4 & 98K & 99K & \\
+% test5 & 4,9K & 4,4K & \\
+% test6 & 265K & 168K & \\
+% test7 & 54K & 34K & \\
+% test8 & 153K & & \\
+% test9 & 85K & & \\
+% test10 & 235K & & \\
+% test11 & 118K & & \\
+% test12 & 516K & & \\
+% test13 & 226K & & \\
+% test14 & 807K & & \\
+% test15 & 1,2M & & \\
+% test16 & 438K & & \\
+% test17 & 924K & & \\
+% test18 & 1,2M & & \\
+% test19 & 5,2K & & \\
+% test20 & 14K & & \\
+% test21 & 2,2K & & \\
+% test22 & 7,7K & & \\
+% test23 & 218K & & \\
+% test24 & 9,8K & & \\
+
+% \hline
+% \end{tabular}
+% \end{table}
 
 
 
+% %%% TODO
+% \begin{thebibliography}{8}
+% \bibitem{ref_article1}
+% Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel-Ziv-Welch (LZW) Coding as
+% Data Compression Techniques\textbf{}
 
-%%% TODO
-\begin{thebibliography}{8}
-\bibitem{ref_article1}
-Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel-Ziv-Welch (LZW) Coding as
-Data Compression Techniques\textbf{}
+% \bibitem{ref_url1}
+% \url{https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/}
 
-\bibitem{ref_url1}
-\url{https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/}
+% \bibitem{ref_url2}
+% \url{https://www.programiz.com/dsa/huffman-coding}
 
-\bibitem{ref_url2}
-\url{https://www.programiz.com/dsa/huffman-coding}
+% \bibitem{ref_url3}
+% \url{http://www.cas.mcmaster.ca/~cs2c03/2020/LN21-2020.pdf}
 
-\bibitem{ref_url3}
-\url{http://www.cas.mcmaster.ca/~cs2c03/2020/LN21-2020.pdf}
+% \bibitem{ref_url4}
+% \url{https://www.youtube.com/watch?v=j2HSd3HCpDs\&t=428s}
 
-\bibitem{ref_url4}
-\url{https://www.youtube.com/watch?v=j2HSd3HCpDs\&t=428s}
+% \bibitem{ref_url5}
+% \url{https://www.youtube.com/watch?v=dM6us854Jk0}
 
-\bibitem{ref_url5}
-\url{https://www.youtube.com/watch?v=dM6us854Jk0}
+% \bibitem{ref_url6}
+% \url{https://www.youtube.com/watch?v=JsTptu56GM8}
 
-\bibitem{ref_url6}
-\url{https://www.youtube.com/watch?v=JsTptu56GM8}
-
-\end{thebibliography}
+% \end{thebibliography}
 \end{document}

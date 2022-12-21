@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.7)  21 DEC 2022 22:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.7)  21 DEC 2022 23:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -219,17 +219,17 @@ Overfull \hbox (6.81343pt too wide) in paragraph at lines 128--134
 
 [3] [4] [5] (./10.aux) ) 
 Here is how much of TeX's memory you used:
- 1991 strings out of 479574
- 29500 string characters out of 5877220
- 328328 words of memory out of 5000000
- 19994 multiletter control sequences out of 15000+600000
+ 1984 strings out of 479574
+ 29426 string characters out of 5877220
+ 328307 words of memory out of 5000000
+ 19987 multiletter control sequences out of 15000+600000
  479295 words of font info for 47 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
  55i,7n,62p,329b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0500.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk>
-Output written on 10.pdf (5 pages, 73780 bytes).
+Output written on 10.pdf (5 pages, 68460 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
+ 248 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
