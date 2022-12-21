@@ -31,6 +31,12 @@ decompress:
 	chmod +x decompress_all.sh
 	./decompress_all.sh
 
+run:
+	chmod +x compress_all.sh
+	./compress_all.sh
+	chmod +x decompress_all.sh
+	./decompress_all.sh
+
 clean:
 	rm -rf *.o huffman
 

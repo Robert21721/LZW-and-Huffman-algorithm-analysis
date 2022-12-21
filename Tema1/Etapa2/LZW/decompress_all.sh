@@ -1,6 +1,6 @@
 #! /bin/bash
 
-mkdir -p Decompressed_files
+mkdir -p ../out/LZW/Decompressed_files
 
 function create_decompressed_file {
     start_test_nr=$1
@@ -8,8 +8,8 @@ function create_decompressed_file {
 
 	for test_nr in $(seq $start_test_nr $end_test_nr)
     do  
-        extension=`find ../Input_files/test${test_nr}.* | cut -d'.' -f4`
-        ./LZW -d ./Compressed_files/test${test_nr}.bin ./Decompressed_files/test${test_nr}.${extension}
+        extension=`find ../in/test${test_nr}.* | cut -d'.' -f4`
+        ./LZW -d ../out/LZW/Compressed_files/test${test_nr}.bin ../out/LZW/Decompressed_files/test${test_nr}.${extension}
     done
 
 }

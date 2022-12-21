@@ -1,6 +1,6 @@
 #! /bin/bash
 
-mkdir -p Compressed_files
+mkdir -p ../out/Huffman/Compressed_files
 
 function create_compressed_file {
     start_test_nr=$1
@@ -8,8 +8,8 @@ function create_compressed_file {
 
 	for test_nr in $(seq $start_test_nr $end_test_nr)
     do
-        extension=`find ../Input_files/test${test_nr}.* | cut -d'.' -f4`
-        ./huffman -c ../Input_files/test${test_nr}.${extension} ./Compressed_files/test${test_nr}.bin
+        extension=`find ../in/test${test_nr}.* | cut -d'.' -f4`
+        ./huffman -c ../in/test${test_nr}.${extension} ../out/Huffman/Compressed_files/test${test_nr}.bin
     done
 
 }
