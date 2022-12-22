@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1671662718 "/home/robert/Desktop/Materiale cursuri/ANUL 2/Semestrul 1/AA/Analiza-algoritmilor/Tema1/Etapa2/Referat/10.tex" "10.pdf" "10" 1671662718
+["pdflatex"] 1671726227 "/home/robert/Desktop/Materiale cursuri/ANUL 2/Semestrul 1/AA/Analiza-algoritmilor/Tema1/Etapa2/Referat/10.tex" "10.pdf" "10" 1671726227
   "/etc/texmf/web2c/texmf.cnf" 1667639521 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0500.600pk" 1669209034 12608 79a81d5d5e03169af9e4a5315f5eca73 ""
   "/home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk" 1667640388 22480 03f7e04de995c905d6a7e2368d5dda56 ""
@@ -9,7 +9,7 @@
   "/home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk" 1667640390 21332 c0ae859eac947376985172dcf318b6fb ""
   "/home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk" 1667640390 23784 de29543002b2b6a13a3d7fa0d2f4c880 ""
   "/home/robert/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk" 1667640387 10448 f481dc656b46628cc4207acc9329cd6c ""
-  "/home/robert/Desktop/Materiale cursuri/ANUL 2/Semestrul 1/AA/Analiza-algoritmilor/Tema1/Etapa2/Referat/10.tex" 1671662718 16492 aeb846c296d1851b529f1a107a578057 ""
+  "/home/robert/Desktop/Materiale cursuri/ANUL 2/Semestrul 1/AA/Analiza-algoritmilor/Tema1/Etapa2/Referat/10.tex" 1671726227 21824 b017bf36b2c24b678ca815de333a10e6 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0500.tfm" 1136768653 3584 0913860e6fa2bdf78ecaf460b391112b ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm" 1136768653 3584 1a7de6c99457381c64abc1a7c545505f ""
@@ -49,11 +49,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1667849805 168054 c8928d7306e61dbf9bb950060320aa5b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1667849808 2059947 04c680a24601f97338eb3891ac8b676d ""
-  "10.aux" 1671662718 1797 074aeffa3a2fd17bf0848772c5903034 "pdflatex"
-  "10.tex" 1671662718 16492 aeb846c296d1851b529f1a107a578057 ""
+  "10.aux" 1671726227 1990 17ca4b3f6e3ea4056cf4960ef9b3a6e3 "pdflatex"
+  "10.tex" 1671726227 21824 b017bf36b2c24b678ca815de333a10e6 ""
   "llncs.cls" 1642662864 43512 637b96de164501a449212e7b2cf4d19d ""
-  "tabel1.eps" 1671662169 2668034 cd5bc02d1c2f2a44932f2214ebf91f4b ""
   "tabel2.eps" 1671662050 7646248 584ab1dc46f28b5f243007a6cf4ba770 ""
+  "tabel3.eps" 1671721972 2668034 4300f27add2e7de44412c3737871cb08 ""
   (generated)
   "10.aux"
   "10.log"

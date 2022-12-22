@@ -126,7 +126,7 @@ Huffman. Odata creeat, se citeste fisierul bit cu bit si se parcurge arborele in
 Cand se ajunge la o frunza putem fi siguri ca aceasta contine un caracter valid, caracterul fiind scris apoi in noul fisier.
 
 \textbf{Complexitatea temporala} a acestui algoritm este O(NlogN) deoarece fiecare iteratie prin minheap pentru a pastra proprietatea
-acestuia ne va costa logN pasi, aceasta fiind refacuta de N ori (o data pentru fiecare element)
+acestuia ne va costa logN pasi, aceasta fiind refacuta de N ori (o data pentru fiecare element).
 In plus, pentru a construi arborele, la fiecare pas sunt extrase 2 noduri din minheap, ceea ce ar insemna 2logN operatii pentru a reface heapul
 si apoi este adaugat in minheap nodul parinte obtinut (inca logN operatii pentru a reface heapul). Aceste operatii sunt executate de N ori (pentru
 ca la fiecare pas sunt scoase 2 noduri si adaugat unul nou) ceea ce in final ne va duce la o complexitate de O(3NlogN) adica tot O(NlogN), unde
@@ -186,9 +186,9 @@ O parte din testele folosite au fost generate de mine folosind un program simplu
 In cazul fisierelor .txt am incercat sa acopar cazuri de genul:
 \begin{itemize}
     \item acelasi caracter de un numar mare de ori
-    \item 3 caractere de un numar mare de ori (aceeasi frecventa toate 3)
-    \item intregul alfabet de un numar mare de ori (aceeasi frecventa toate 3)
-    \item toate caracterele ascii de un numar mare de ori (aceeasi frecventa toate 3)
+    \item 3 caractere de un numar mare de ori (aceeasi frecventa)
+    \item intregul alfabet de un numar mare de ori (aceeasi frecventa)
+    \item toate caracterele ascii de un numar mare de ori (aceeasi frecventa)
     \item toate caracterele ascii de un numar mare de ori (frecvente diferite)
     \item caractere cu diferenta mare intre numarul de aparitii
     \item text lung care nu se repeta 
@@ -210,87 +210,125 @@ numele variabilelor se repeta, caz in care algoritmii ar fi destul de eficienti.
 
 Ruland cei doi algoritmi pe datele de intrare mentionate mai sus, avand la dispozitie in procesor I7 genetaria 11, 16 GB de ram si o placa grafica de 4GB, rezultatele au fost urmatoarele:
 
+
+\begin{itemize}
+    \item test1 (acelasi caracter de un numar mare de ori) - vine cu o performanta buna din partea
+    albilor algoritmi, Huffman reusind sa faca o compresie uimitoare deoarece este codificat un singur caracter,
+    codificcarea fiind realizata pe un singur bit.
+
+    \item test2 (3 caractere de un numar mare de ori (aceeasi frecventa)) - in acest caz, chiar daca codificarile
+    guffman sunt in continuare scurte, algoritmul LZW face o treaba buna datorita textului repetitiv si mult mai lung, acesta
+    avand ocazia sa isi foloseasca dictionarul intr-un mod foarte eficient
+
+    \item test3 (intregul alfabet de un numar mare de ori (aceeasi frecventa)) - in acest caz se poate observa ca,
+    in timp ce LZW are o performanta apropiata de cea a testului anterior, cea a algoritmului Huffman este mult mai slaba
+    pentru ca este fortat sa atribuie coduri lungi intr-un mod aleator, toate caracterele avand aceeasi frecventa
+
+    \item test4 (toate caracterele ascii de un numar mare de ori (aceeasi frecventa)) - in cadrul acestui test, explicatia este
+    identica cu cea a testelor 2 si 3. In plus, se poate observa ca algoritmul Huffman este extrem de ineficient in momentul in care
+    arborele este plin iar codificarile sunt atribuite aleator, fisierul rezultat avand o dimensiune mai mare decat cel de intrare
+
+    \item test5 (toate caracterele ascii de un numar mare de ori (frecvente diferite)) - desi frecventele sunt usor diferite (diferenta de 1 intre ele)
+    aceasta este nesemnificativa pentru algoritmul Huffman, compresia fiind si in acest caz una slaba
+
+    \item test6 (caractere cu diferenta mare intre numarul de aparitii) - acest test este gandit pentru a favoriza ambii algoritmi,
+    Huffman primind o diferenta semnificativa intre numarul de aparitii al caracterelor, in timp ce LZW are ocazia de a-si creea dictionarul
+    intr-un mod foarte eficient pentru caracterele identice consecutive. Si in acest caz, algoritmul LZW este mult superior.
+
+    \item test7 (text lung care nu se repeta) - pe un text normal, destul de lung, copiat dintr-un articol, se poate observa ca algoritmii au o performanta
+    relativ apropiata si destul de buna
+    \item test8 (text scurt care se repeta de un numar mare de ori) - pe un text repetitiv, algoritmul LZW va avea in mod sigur o performanta mai buna, acesta
+    retinand cuvintele folosite si reutilizandu-le cu usurinta
+
+    \item testele 9-12 (imagini cu numar redus de culori (doua sau trei)) - se poate observa ca, in cazul unor fisiere bitmap ce contin un numar redus de culori,
+    matricea de biti va avea elemente repetitive ce vor favoriza algoritmul LZW. Ttousi, deoarece culorile sunt putine si apar de un numar mare de ori, si algoritmul
+    Huffman va face o compresie destul de buna
+
+    \item testele 13-15 (imagini colorate) - deoarece culorile nu mai formeaza un tipar, algoritmul LZW va fi extrem de ineficient, fisierul rezultat avand o dimensiune
+    mai mare decat cel initial. In aceste conditii, Huffman se descurca mult mai bine deoarece nu il intereseaza ordinea octetilor din imagine, ci doar cat de des apar
+
+    \item testul 16 (un fisier gif) - datorita faptului ca fisierele de acest tip sunt deja supuse unui grad mare de compresie, ambii algoritmi vor
+    fi ineficienti, fisierele rezultate avand o dimensiune mai mare decat cele de intrare
+
+    \item testele 17-18 (fisiere audio) - si in acest caz, rationamentul este acelasi ca in testele anterioare, patandu-se totusi observa o eficienta mai mare din partea
+    algoritmului Huffman, motivul fiind acelasi ca cel de la testele 13-15
+
+    \item testele 19-22 (fisiere sursa in diferite limbaje) - deoarece fisierele ce contin cod nu sunt foarte lungi, algoritmul Huffman realizeaza o compresie mai buna, 
+    LZW neapucand sa isi formeze inca un dictionar complex
+    
+    \item test 23 (fisier .odt) - aceeasi explicatie ca in cazul testelor 13-18
+
+    \item test 24 (date generate random) - pe date aleatoare, ambii algoritmi vor creea fisiere de output mai mari decat cele originale, in cazul algoritmului LZW fiind
+    vizibila cel mai prost rezultat  al sau, fisierul de iesire fiind mai mult decat dublu fata de cel de intrare
+\end{itemize}
+
+
 \begin{figure}
-\includegraphics[width=\textwidth]{tabel1.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig1}
-\end{figure}
+    \includegraphics[width=\textwidth]{tabel3.eps}
+    \caption{Tabel ce compara dimensiunea fisierului de intrare cu dimensiuniea fisierului comprimat
+    rezultat in urma rularii celor doi algoritmi} \label{fig1}
+    \end{figure}
+
+In continuare am realizat o reprezentare grafica a eficientei celor 2 algoritmi in functie de testele de intrare.
+Pe axa OX apare numarul testului iar pe axa OY este dat in procente
+gradul de compresie rezultat (dimensiunea fisierului de iesire / dimensiunea fisierului de intrare).
+
 
 \begin{figure}
 \includegraphics[width=\textwidth]{tabel2.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig2}
+\caption{Grafic ce compara procentul de compresie al fisierelor rezultate in urma rularii celor doi algoritmi} \label{fig2}
 \end{figure}
 
+\section{Concluzii}
 
+Din graficul reprezentat anterior se poate observa ca algoritmul LZW are o eficienta foarte buna cand vine vorba de fisiere text mari (si fisierele
+bitmap ce contin putine culori), in timp ce Huffman reuseste sa realizeze o compresie mai slaba, dar in continuare relevanta pe o gama larga de fisiere de intrare
+(fisierul comprimat are, in majoritatea cazurilor, o dimensiune mai mica decat cel de input, chiar daca aceasta consta doar in cativa KB).
 
+In concluzie, algoritmul LZW ar fi eficient in practica doar pentru comprimarea fisierelor text foarte mari, caz in care dictionarul sau
+ar avea ocazia de a ajunge la o dimensiune considerabila, avand deci o probabilitate foarte mare de a refolosi cuvintele deja intalinte.
 
+In schimb, algoritmul Huffman are o probabilitate mai mare de a realiza o compresie in general eficienta pe o gama larga de fisiere cu format variat, deoarece acesta
+nu are nevoie sa se ghideze dupa un standard secvential pentru a da un randament bun.
 
+Facand o medie a rezultatelor obitnute anterior, gradul mediu de compresie al algoritmului Huffman este de 66.963\%, in timp ce pentru LZW, acesta este de 67.877\%.
+Daca am alege sa ignorma ultimul test (deoarece ambii sunt ineficienti), cele doua numere ar deveni: 64.968\% pentru Huffman si 60.619\% pentru LZW, caz in care algoritmul
+LZW s-ar comporta mai bine pentru gama teste alese.
 
-% \begin{table}[ht]
-% \caption{Tabel ce contine dimensiunile fisierelorerelor
-% de intrare si a celor rezultate}\label{tab1}
-% \centering
-% \begin{tabular}{|l|l|l|l|}
-% \hline
-% tests & fisiere de input & Huffman  & LZW\\
-% % \hline
-% test1 & 1000  & 13 & \\
-% test2 & 293K & 62K & \\
-% test3 & 254K & 152K & \\
-% test4 & 98K & 99K & \\
-% test5 & 4,9K & 4,4K & \\
-% test6 & 265K & 168K & \\
-% test7 & 54K & 34K & \\
-% test8 & 153K & & \\
-% test9 & 85K & & \\
-% test10 & 235K & & \\
-% test11 & 118K & & \\
-% test12 & 516K & & \\
-% test13 & 226K & & \\
-% test14 & 807K & & \\
-% test15 & 1,2M & & \\
-% test16 & 438K & & \\
-% test17 & 924K & & \\
-% test18 & 1,2M & & \\
-% test19 & 5,2K & & \\
-% test20 & 14K & & \\
-% test21 & 2,2K & & \\
-% test22 & 7,7K & & \\
-% test23 & 218K & & \\
-% test24 & 9,8K & & \\
-
-% \hline
-% \end{tabular}
-% \end{table}
+Datorita acestei diferente fragile intre cei doi algoritmi, nu putem concluziona ca unul este mai bun decat celalalt, rezultatul depinzand
+de datele de intrare alese.
 
 
 
 % %%% TODO
-% \begin{thebibliography}{8}
-% \bibitem{ref_article1}
-% Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel-Ziv-Welch (LZW) Coding as
-% Data Compression Techniques\textbf{}
+\begin{thebibliography}{8}
+\bibitem{ref_article1}
+Autor, Gajendra Sharma, Analysis of Huffman Coding and Lempel-Ziv-Welch (LZW) Coding as
+Data Compression Techniques\textbf{}
 
-% \bibitem{ref_url1}
-% \url{https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/}
+\bibitem{ref_url1}
+\url{https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/}
 
-% \bibitem{ref_url2}
-% \url{https://www.programiz.com/dsa/huffman-coding}
+\bibitem{ref_url2}
+\url{https://www.programiz.com/dsa/huffman-coding}
 
-% \bibitem{ref_url3}
-% \url{http://www.cas.mcmaster.ca/~cs2c03/2020/LN21-2020.pdf}
+\bibitem{ref_url3}
+\url{http://www.cas.mcmaster.ca/~cs2c03/2020/LN21-2020.pdf}
 
-% \bibitem{ref_url4}
-% \url{https://www.youtube.com/watch?v=j2HSd3HCpDs\&t=428s}
+\bibitem{ref_url4}
+\url{https://www.youtube.com/watch?v=j2HSd3HCpDs\&t=428s}
 
-% \bibitem{ref_url5}
-% \url{https://www.youtube.com/watch?v=dM6us854Jk0}
+\bibitem{ref_url5}
+\url{https://www.youtube.com/watch?v=dM6us854Jk0}
 
-% \bibitem{ref_url6}
-% \url{https://www.youtube.com/watch?v=JsTptu56GM8}
+\bibitem{ref_url6}
+\url{https://www.youtube.com/watch?v=JsTptu56GM8}
 
-% \end{thebibliography}
+\bibitem{ref_url7}
+\url{https://www.geeksforgeeks.org/lzw-lempel-ziv-welch-compression-technique/}
+
+\bibitem{ref_url8}
+\url{https://stackoverflow.com/questions/6189765/big-o-complexities-of-algorithms-lzw-and-huffman}
+\end{thebibliography}
+
 \end{document}
